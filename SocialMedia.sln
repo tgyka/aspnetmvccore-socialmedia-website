@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia.Web", "SocialMedia.Web\SocialMedia.Web.csproj", "{F7C896D0-F747-41F4-8C48-EBD9F1ED325E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0EBF9AED-7604-4678-A46D-A636495B41CD} = {0EBF9AED-7604-4678-A46D-A636495B41CD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia.Model", "SocialMedia.Model\SocialMedia.Model.csproj", "{337093D4-07F6-4961-A082-8A9DA6F404D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia.Data", "SocialMedia.Data\SocialMedia.Data.csproj", "{0EBF9AED-7604-4678-A46D-A636495B41CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7C896D0-F747-41F4-8C48-EBD9F1ED325E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7C896D0-F747-41F4-8C48-EBD9F1ED325E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7C896D0-F747-41F4-8C48-EBD9F1ED325E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7C896D0-F747-41F4-8C48-EBD9F1ED325E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{337093D4-07F6-4961-A082-8A9DA6F404D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{337093D4-07F6-4961-A082-8A9DA6F404D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{337093D4-07F6-4961-A082-8A9DA6F404D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{337093D4-07F6-4961-A082-8A9DA6F404D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EBF9AED-7604-4678-A46D-A636495B41CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EBF9AED-7604-4678-A46D-A636495B41CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EBF9AED-7604-4678-A46D-A636495B41CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EBF9AED-7604-4678-A46D-A636495B41CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F27D802A-73C9-4FDF-BD38-9A2489C30280}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,362 @@
+﻿@model SocialMedia.Web.Models.IndexMessages
+@{
+    ViewData["Title"] = "Messages";
+}
+
+@section styles {
+    <style>
+        .messages {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            grid-gap: 20px;
+        }
+
+            .messages .messages-left {
+                width: 100%;
+                height: 85vh;
+            }
+
+                .messages .messages-left .messages-left-header {
+                    width: 100%;
+                    display: flex;
+                    padding: 3% 3% 3% 3%;
+                    justify-content: flex-start;
+                    align-items: center;
+                }
+
+                    .messages .messages-left .messages-left-header img {
+                        border-radius: 50%;
+                        margin: 0 5px 0 0;
+                    }
+
+                    .messages .messages-left .messages-left-header h2 {
+                        margin: 0;
+                    }
+
+                    .messages .messages-left .messages-left-header .messages-left-header-buttons {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                    }
+
+                        .messages .messages-left .messages-left-header .messages-left-header-buttons button {
+                            border: none;
+                            padding: 7%;
+                            text-align: center;
+                            border-radius: 50%;
+                        }
+
+                .messages .messages-left .messages-left-search {
+                    padding: 1% 0;
+                }
+
+                    .messages .messages-left .messages-left-search input {
+                        width: 100%;
+                        background: #e6e6e6;
+                        padding: 3% 5%;
+                        border: none;
+                        border-radius: 15px;
+                    }
+
+                .messages .messages-left .messages-left-messagelist {
+                    max-height: 65vh;
+                    width: 100%;
+                }
+
+                    .messages .messages-left .messages-left-messagelist .messages-left-listitem {
+                        width: 100%;
+                        padding: 2% 3%;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                    }
+
+                        .messages .messages-left .messages-left-messagelist .messages-left-listitem:hover {
+                            background: #fff;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        }
+
+                        .messages .messages-left .messages-left-messagelist .messages-left-listitem img {
+                            border-radius: 50%;
+                            margin-right: 5px;
+                        }
+
+                        .messages .messages-left .messages-left-messagelist .messages-left-listitem .messages-left-listitem-titles {
+                            width: 100%;
+                            line-height: 1.3;
+                            display: grid;
+                        }
+
+                            .messages .messages-left .messages-left-messagelist .messages-left-listitem .messages-left-listitem-titles a {
+                                font-size: 16px;
+                            }
+
+            .messages .messages-right {
+                width: 100%;
+                height: 85vh;
+                border-left: 1px solid rgba(0,0,0,0.2);
+            }
+
+                .messages .messages-right .messages-right-header {
+                    width: 100%;
+                    padding: 1% 1% 1% 1%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    border-bottom: 1px solid rgba(0,0,0,0.2);
+                }
+
+                    .messages .messages-right .messages-right-header img {
+                        border-radius: 50%;
+                        margin-right: 5px;
+                    }
+
+                .messages .messages-right .messages-right-messages {
+                    width: 100%;
+                    min-height: 65vh;
+                    max-height: 65vh;
+                    padding: 1%;
+                    overflow: scroll;
+                }
+
+                    .messages .messages-right .messages-right-messages .messages-right-messages-left {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-start;
+                    }
+
+                        .messages .messages-right .messages-right-messages .messages-right-messages-left span {
+                            min-width: 30%;
+                            max-width: 60%;
+                            background: #e4e4e4;
+                            border-radius: 5px;
+                            padding: 1%;
+                            margin: 0.5% 0;
+                        }
+
+                    .messages .messages-right .messages-right-messages .messages-right-messages-right {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+
+                        .messages .messages-right .messages-right-messages .messages-right-messages-right span {
+                            min-width: 30%;
+                            max-width: 60%;
+                            background: #e4e4e4;
+                            border-radius: 5px;
+                            padding: 1%;
+                            margin: 0.5% 0;
+                        }
+
+                .messages .messages-right .messages-right-sendmessage {
+                    width: 100%;
+                    padding: 1%;
+                }
+
+                    .messages .messages-right .messages-right-sendmessage textarea {
+                        width: 100%;
+                        height: 35px;
+                        border: none;
+                        border-radius: 10px;
+                        padding: 0.5% 1%;
+                        background: #e4e4e4;
+                    }
+    </style>
+
+}
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Talk friends</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form  asp-action="InsertMessageForPopup" asp-controller="Messages" method="post">
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nickname-text" class="col-form-label">Nickname:</label>
+                            <input type="text" name="username" class="form-control" id="txtUsername">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" name="text" id="txtMessagetxt"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="messages">
+    <div class="messages-left">
+        <div class="messages-left-header">
+            <img src="~/images/@Model.PPPath"
+                 alt="PP" width="60" height="60">
+            <h2>Talks</h2>
+            <div class="messages-left-header-buttons">
+                <button data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fas fa-reply"></i>
+                </button>
+            </div>
+        </div>
+        <div class="messages-left-search">
+            <input placeholder="Search in messenger" />
+        </div>
+        <div class="messages-left-messagelist">
+            @foreach (var item in Model.UserList)
+            {
+                <div itemid="@item.Id" class="messages-left-listitem">
+                    <img src="~/images/@item.PhotoPath"
+                         alt="PP" width="50" height="50">
+                    <div class="messages-left-listitem-titles">
+                      <span> @item.Name @item.Surname</span>
+                        <span>
+                            @if (item.ToMessages.Count() != 0 && item.FromMessages.Count() != 0)
+                            {
+                                @if (item.ToMessages.Last().Time < item.FromMessages.Last().Time)
+                                {
+                                    @item.FromMessages.Last().Text
+                                }
+                                else
+                                {
+                                    @item.ToMessages.Last().Text
+
+                                }
+
+                            }
+                            else if (item.ToMessages.Count() != 0 && item.FromMessages.Count() == 0)
+                            {
+                                @item.ToMessages.Last().Text
+                            }
+                            else if (item.FromMessages.Count() != 0 && item.ToMessages.Count() == 0)
+                            {
+                                @item.FromMessages.Last().Text
+                            }
+
+
+                        </span>
+                    </div>
+                </div>
+
+            }
+           
+
+        </div>
+    </div>
+    <div class="messages-right">
+        <div class="messages-right-header">
+            
+        </div>
+        <div class="messages-right-messages">
+         
+        </div>
+        <div class="messages-right-sendmessage">
+            <textarea id="txtMessage" placeholder="Type a message"></textarea>
+        </div>
+    </div>
+
+
+
+    @section scripts {
+        <script>
+            $(document).ready(function () {
+                var targetId;
+                var token = $('[name=__RequestVerificationToken]').val();
+
+                $(".messages-left-listitem").click(function () {
+                    var div = $(this);
+                    targetId = parseInt($(this).attr('itemId'), 10);
+                    console.log(targetId);
+                    $.ajax({
+                        url: '/Messages/GetMessages',
+                        type: 'POST',
+                        data: { __RequestVerificationToken: token, targetId: targetId },
+                        success: function (result) {
+
+                            console.log(result);
+                            $(".messages-right-header").html("<img src='/images/" + result.user.photoPath + "'" +
+                                "alt = 'PP' width = '50' height = '50' >" +
+                                "<h3>" + result.user.name + " " + result.user.surname + "</h3>");
+
+                            $(".messages-right-messages").html("");
+
+                            $.each(result.messagesList, function (index, val) {
+                                console.log(val);
+                                if (targetId == val.fromUserId) {
+                                    $(".messages-right-messages").append(
+
+                                        "<div class='messages-right-messages-left'>" +
+                                        "<span>" + val.text + "</span>" +
+                                        "</div >"
+                                    );
+                                }
+
+                                else if (targetId == val.toUserId) {
+                                    $(".messages-right-messages").append(
+
+                                        "<div class='messages-right-messages-right'>" +
+                                        "<span>" + val.text + "</span>" +
+                                        "</div >"
+                                    );
+                                }
+
+                            });
+                        }
+                    });
+
+                });
+
+                $(document).on('keypress', '#txtMessage', function (event) {
+                    var keycode = (event.keyCode ? event.keyCode : event.which);
+                    var text = $(this).val();
+                    var messagelist = $(this).parent().parent().children('.messages-right-messages');
+
+                    if (keycode == '13') {
+
+                        if (event.shiftKey) {
+                            console.log(messagelist);
+                            console.log("shiftenter");
+                        } else {
+                            $.ajax({
+                                url: '/Messages/InsertMessage',
+                                type: 'POST',
+                                data: { __RequestVerificationToken: token, targetId: targetId, text: text },
+                                success: function (result) {
+                                    messagelist.append("<div class='messages-right-messages-right'>" +
+                                        "<span>" + text + "</span>" +
+                                        "</div >");
+                                }
+                            });
+                            $(this).val('');
+
+
+                        }
+                    }
+                });
+
+
+                function GetResult(result) {
+                   
+                }
+
+            });
+
+
+        </script>
+
+    }
+

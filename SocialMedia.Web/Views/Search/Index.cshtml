@@ -1,0 +1,132 @@
+﻿@model SocialMedia.Web.Models.SearchIndex
+@{
+    ViewData["Title"] = "Search";
+}
+
+@section styles {
+    <style>
+        .friends {
+            width: 70%;
+            margin: 30px auto;
+        }
+
+            .friends div {
+                width: 100%;
+                padding: 0.5%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+                .friends div img {
+                    border-radius: 50%;
+                    margin: 0 5% 0 0;
+                }
+
+                .friends div h3 {
+                    margin: 0;
+                }
+
+                .friends div button {
+                    margin: 0 0 0 5%;
+                    background: #55a7ce;
+                    color: #fff;
+                    border: none;
+                    padding: 1% 4%;
+                    border-radius: 10px;
+                }
+
+                .friends div .btnremove {
+                    background: gray;
+                }
+
+        .f
+        .friends div button:hover {
+            background: gray;
+        }
+    </style>
+}
+
+<div class="friends">
+    @foreach (var item in Model.Model)
+    {
+        <div itemid="@item.Id">
+            <img src="~/images/@item.PhotoPath"
+                 alt="Smiley face" width="80" height="80">
+            <h3><a href="/profile/@item.Username">@item.Name @item.Surname</a></h3>
+            @if (@item.FromFriends.Where(c => c.FromUserId == Model.UserId || c.ToUserId == Model.UserId).Count() == 0 &&
+          @item.ToFriends.Where(c => c.FromUserId == Model.UserId || c.ToUserId == Model.UserId).Count() == 0)
+            {
+                <button class="btnadd">Add Friend</button>
+
+            }
+            else
+            {
+                <button class="btnremove">Request Sended</button>
+
+            }
+        </div>
+    }
+
+
+
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            var token = $('[name=__RequestVerificationToken]').val();
+
+
+            $(document).on('click','.btnadd',function () {
+                var button = $(this);
+                var targetId = parseInt($(this).parent().attr('itemId'), 10);
+                console.log(targetId);
+                $.ajax({
+                    url: '/Friends/Friends',
+                    type: 'POST',
+                    data: { __RequestVerificationToken: token, targetId: targetId, status: 2 },
+                    success: function (result) {
+                        if (result) {
+                            button.removeClass('btnadd');
+                            button.addClass('btnremove');
+                            button.html('Request sended');
+
+
+                            console.log(result);
+                        }
+
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.btnremove', function () {
+                var button = $(this);
+                var targetId = parseInt($(this).parent().attr('itemId'), 10);
+                console.log(targetId);
+                $.ajax({
+                    url: '/Friends/Friends',
+                    type: 'POST',
+                    data: { __RequestVerificationToken: token, targetId: targetId, status: -1 },
+                    success: function (result) {
+                        if (result) {
+                            button.removeClass('btnremove');
+                            button.addClass('btnadd');
+                            button.html('Add Friend');
+
+
+                            console.log(result);
+                        }
+
+                    }
+                });
+
+            });
+
+
+
+        });
+    </script>
+}
+

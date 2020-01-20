@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SocialMedia</title>
+
+      <script src="https://kit.fontawesome.com/33f3ffc731.js"
+               crossorigin="anonymous"></script> 
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    </environment>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+
+</head>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #f6f5f7;
+    }
+
+    header .navmenu {
+        width: 100%;
+        min-height: 5%;
+        background: #0094ff;
+        color: #fff;
+        display: grid;
+        grid-template-columns: 1fr 2fr repeat(5,1fr);
+        grid-gap: 20px;
+    }
+
+        header .navmenu a {
+            color: #fff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        header .navmenu input#navmenu-item {
+            color: #fff;
+            cursor: pointer;
+            text-decoration: none;
+            background:none;
+            border:none;
+        }
+
+    header #navmenu-item {
+        margin-left: 20px;
+        padding: 10px;
+    }
+
+        header #navmenu-item.searchbox form {
+            display: inline-flex;
+            align-items: flex-start;
+        }
+
+            header #navmenu-item.searchbox form input {
+                width: 80%;
+                color: #000;
+                border: none;
+                padding: 2px;
+            }
+
+            header #navmenu-item.searchbox form button#searchbutton {
+                width: 20%;
+                background: #fff;
+                border: none;
+                color: #000;
+                padding: 2px;
+            }
+
+                header #navmenu-item.searchbox form button#searchbutton:hover {
+                    background: #e0dddd;
+                }
+
+    footer {
+        text-align: center;
+    }
+</style>
+@RenderSection("Styles", required: false)
+
+<body>
+
+    <header>
+        <div class="navmenu">
+            <a id="navmenu-item" href="/">Homepage</a>
+            <div id="navmenu-item" class="searchbox">
+                <form asp-action="Index" asp-controller="Search" method="get">
+                    <input type="text" name="searchtext"  id="search" placeholder="Search..." />
+                    <button type="submit" id="searchbutton">
+                        <i class="fas fa-search"></i>
+
+                    </button>
+                </form>
+                
+            </div>
+            <a id="navmenu-item" href="/friends">Friends</a>
+            <a id="navmenu-item" href="/messages">Messages</a>
+            <a id="navmenu-item" href="/profile">Profile</a>
+            <a id="navmenu-item" href="/settings">Settings</a>
+            <form asp-action="Logout" asp-controller="Account" method="post">
+                <input id="navmenu-item" type="submit" value="Logout" />
+            </form>
+
+
+
+        </div>
+    </header>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <p>&copy; 2020 - SocialMedia Website</p>
+    </footer>
+
+
+    
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

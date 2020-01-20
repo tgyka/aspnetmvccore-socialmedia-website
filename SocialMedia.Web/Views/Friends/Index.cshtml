@@ -1,0 +1,175 @@
+﻿@model SocialMedia.Web.Models.IndexFriends;
+@{
+    ViewData["Title"] = "Friends";
+}
+
+@section styles {
+    <style>
+        .friends {
+            width:70%;
+            margin:30px auto;
+        }
+
+        .friends div {
+            width:100%;
+            padding:0.5%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        
+        .friends div img {
+            border-radius:50%;
+            margin:0 5% 0 0 ;
+        }
+
+        .friends div h3 {
+            margin:0;
+        }
+
+            .friends div button {
+                margin: 0 0 0 5%;
+                background: #55a7ce;
+                color: #fff;
+                border: none;
+                padding: 1% 4%;
+                border-radius: 10px;
+            }
+            .friends div .btnremove {
+                background: gray;
+            }
+            .friends div .btnaccept {
+                background: green;
+            }
+
+            .friends div button:hover {
+                background:gray;
+            }
+    </style>
+}
+
+    <div class="friends">
+        @foreach (var item in Model.PendingFriends)
+        {
+        <div itemid="@item.FromUser.Id">
+            <img src="~/images/@item.FromUser.PhotoPath"
+                 alt="PP" width="80" height="80">
+            <h3><a href="/profile/@item.FromUser.Username">@item.FromUser.Name @item.FromUser.Surname</a></h3>
+            <button class="btnaccept">Accept Request</button>
+            <button class="btncancel">Cancel</button>
+
+        </div>
+        }
+        @foreach (var item in Model.FriendsTo)
+        {
+        <div itemid="@item.ToUser.Id">
+            <img src="~/images/@item.ToUser.PhotoPath"
+                 alt="PP" width="80" height="80">
+            <h3><a href="/profile/@item.ToUser.Username">@item.ToUser.Name @item.ToUser.Surname</a></h3>
+            <button class="btnremove">Remove</button>
+        </div>
+        }
+
+        @foreach (var item in Model.FriendsFrom)
+        {
+            <div itemid="@item.FromUser.Id">
+                <img src="~/images/@item.FromUser.PhotoPath"
+                     alt="PP" width="80" height="80">
+                <h3><a href="/profile/@item.FromUser.Username">@item.FromUser.Name @item.FromUser.Surname</a></h3>
+                <button class="btnremove">Remove</button>
+            </div>
+        }
+       
+    </div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            var token = $('[name=__RequestVerificationToken]').val();
+
+
+            $(document).on('click','.btnaccept',function () {
+                var button = $(this);
+                var targetId = parseInt($(this).parent().attr('itemId'), 10);
+                console.log(targetId);
+                $.ajax({
+                    url: '/Friends/Friends',
+                    type: 'POST',
+                    data: { __RequestVerificationToken: token, targetId: targetId, status: 1 },
+                    success: function (result) {
+                        button.removeClass('btnaccept');
+                        button.addClass('btnremove');
+                        button.html('Remove');
+
+
+                        console.log(result);
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.btncancel', function () {
+                var button = $(this);
+                var targetId = parseInt($(this).parent().attr('itemId'), 10);
+                console.log(targetId);
+                $.ajax({
+                    url: '/Friends/Friends',
+                    type: 'POST',
+                    data: { __RequestVerificationToken: token, targetId: targetId, status: 0 },
+                    success: function (result) {
+                        button.hide();
+
+
+                        console.log(result);
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.btnremove', function () {
+                var button = $(this);
+                var targetId = parseInt($(this).parent().attr('itemId'), 10);
+                console.log(targetId);
+                $.ajax({
+                    url: '/Friends/Friends',
+                    type: 'POST',
+                    data: { __RequestVerificationToken: token, targetId: targetId, status: -1 },
+                    success: function (result) {
+                        button.removeClass('btnremove');
+                        button.addClass('btnadd');
+                        button.html('Add Friend');
+
+
+                        console.log(result);
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.btnadd', function () {
+                var button = $(this);
+                var targetId = parseInt($(this).parent().attr('itemId'), 10);
+                console.log(targetId);
+                $.ajax({
+                    url: '/Friends/Friends',
+                    type: 'POST',
+                    data: { __RequestVerificationToken: token, targetId: targetId, status: 2 },
+                    success: function (result) {
+                        button.removeClass('btnadd');
+                        button.addClass('btnremove');
+                        button.html('Request sended');
+
+
+                        console.log(result);
+                    }
+                });
+
+            });
+
+
+
+        });
+    </script>
+
+}

@@ -1,0 +1,89 @@
+﻿@model SocialMedia.Model.User
+@{
+    ViewData["Title"] = "Settings";
+}
+
+@section styles {
+    <style>
+        .settings form {
+            width: 70%;
+            padding: 2%;
+            background: #e2e0e0;
+            border-radius: 5px;
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+            .settings form div {
+                width: 100%;
+                padding: 1%;
+            }
+
+                .settings form div .label {
+                    width: 20%;
+                    display: inline-block;
+                    font-size: medium;
+                    text-align: left;
+                    color: #000;
+                }
+
+                .settings form div input, textarea {
+                    padding: 1%;
+                    border: none;
+                    border-radius: 5px;
+                }
+    </style>
+}
+
+<div class="settings">
+    <form asp-action="UpdateSettings" asp-controller="Settings" enctype="multipart/form-data" method="post">
+        <div>
+            <div class="label"><span>Username</span></div>
+            <input type="text" name="Username" value="@Model.Username" />
+        </div>
+        <div>
+            <div class="label">First Name</div>
+            <input type="text" name="Name" value="@Model.Name" />
+        </div>
+        <div>
+            <div class="label">Surname</div>
+            <input type="text" name="Surname" value="@Model.Surname" />
+        </div>
+        <div>
+            <div class="label">Password</div>
+            <input type="text" name="Password" />
+        </div>
+        <div>
+            <div class="label">Email</div>
+            <input type="text" name="Email" value="@Model.Email" />
+        </div>
+        <div>
+            <div class="label">Profile Picture</div>
+            <input id="uploadimage" name="Photo" type="file" accept="image/x-png,image/gif,image/jpeg" />
+        </div>
+        <div>
+            <div class="label">Location</div>
+            <input type="text" name="Location" value="@Model.Location" />
+        </div>
+        <div>
+            <div class="label">Bio</div>
+            <textarea name="Bio">@Model.Bio</textarea>
+        </div>
+        <button type="submit">Save</button>
+
+
+    </form>
+
+</div>
+
+
+
+@section scripts {
+    <script>
+
+    </script>
+}
+

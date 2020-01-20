@@ -1,0 +1,9 @@
+C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\bin\Debug\netcoreapp2.1\SocialMedia.Model.deps.json
+C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\bin\Debug\netcoreapp2.1\SocialMedia.Model.dll
+C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\bin\Debug\netcoreapp2.1\SocialMedia.Model.pdb
+C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.csprojAssemblyReference.cache
+C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.csproj.CoreCompileInputs.cache
+C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.AssemblyInfoInputs.cache
+C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.AssemblyInfo.cs
+C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.dll
+C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.pdb

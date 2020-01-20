@@ -1,0 +1,490 @@
+﻿@model SocialMedia.Web.Models.HomeIndexModel
+
+@{
+    ViewData["Title"] = "HomePage";
+}
+@section styles {
+    <style>
+        .homepage-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+        }
+
+            .homepage-content .homepage-content-left {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 10%;
+                line-height: 3;
+            }
+
+                .homepage-content .homepage-content-left a {
+                    text-decoration: none;
+                    font-size: large;
+                    font-weight: bold;
+                    color: #000;
+                }
+
+                    .homepage-content .homepage-content-left a:hover {
+                        color: #337ab7;
+                    }
+
+            .homepage-content .homepage-content-right {
+                width: 100%;
+                min-height: 80vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
+                .homepage-content .homepage-content-right .create-post {
+                    width: 80%;
+                    background: #fff;
+                    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+                    border-radius: 5px;
+                    padding: 1% 5%;
+                    margin-top: 30px;
+                }
+
+                    .homepage-content .homepage-content-right .create-post .postarea {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                    }
+
+                        .homepage-content .homepage-content-right .create-post .postarea img {
+                            border-radius: 50%;
+                        }
+
+                        .homepage-content .homepage-content-right .create-post .postarea textarea {
+                            background: #fff;
+                            padding: 20px;
+                            width: 100%;
+                            font-size: medium;
+                            border: none;
+                        }
+
+                    .homepage-content .homepage-content-right .create-post #create-post-button {
+                        float: right;
+                        background: #0094ff;
+                        color: #fff;
+                        padding: 1.1%;
+                        margin: 1.5%;
+                        border-radius: 20%;
+                        border: none;
+                        text-align: center;
+                    }
+
+                    .homepage-content .homepage-content-right .create-post input {
+                        float: left;
+                        padding: 1.1%;
+                        margin: 1%;
+                        border: none;
+                    }
+
+                        .homepage-content .homepage-content-right .create-post input[type="file"]::-webkit-file-upload-button {
+                            background: #0094ff;
+                            color: #fff;
+                            padding: 2%;
+                            border-radius: 5px;
+                            border: none;
+                        }
+
+                .homepage-content .homepage-content-right .posts {
+                    width: 100%;
+                }
+
+
+
+
+                    .homepage-content .homepage-content-right .posts .post {
+                        width: 80%;
+                        min-height: 10vh;
+                        background: #fff;
+                        padding: 5% 10% 5% 10%;
+                        margin: 20px 0 0 0;
+                        box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+                        border-radius: 5px;
+                    }
+
+                        .homepage-content .homepage-content-right .posts .post .post-header {
+                            width: 100%;
+                            line-height: 1;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                        }
+
+
+
+                            .homepage-content .homepage-content-right .posts .post .post-header h3 {
+                                margin: 0;
+                            }
+
+
+                            .homepage-content .homepage-content-right .posts .post .post-header img {
+                                border-radius: 50%;
+                                margin: 0 5px 0 0;
+                            }
+
+                        .homepage-content .homepage-content-right .posts .post .post-content {
+                            padding: 1% 0 1% 0;
+                        }
+
+                        .homepage-content .homepage-content-right .posts .post .post-buttons {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                            .homepage-content .homepage-content-right .posts .post .post-buttons button {
+                                display: block;
+                                width: 33%;
+                                padding: 1% 0 1% 0;
+                                border-radius: 5%;
+                                text-align: center;
+                                border: none;
+                            }
+
+                                .homepage-content .homepage-content-right .posts .post .post-buttons button.active {
+                                    font-weight: bold;
+                                    color: dodgerblue;
+                                }
+
+
+                                .homepage-content .homepage-content-right .posts .post .post-buttons button:hover {
+                                    background: #f9f9f9;
+                                }
+
+                        .homepage-content .homepage-content-right .posts .post .post-comments {
+                            margin: 10px 0 0 0;
+                            border-top: 1px solid rgba(0,0,0,0.6);
+                            width: 100%;
+                        }
+
+                            .homepage-content .homepage-content-right .posts .post .post-comments .post-comment {
+                                width: 100%;
+                                padding: 10px 0 10px 0;
+                            }
+
+                                .homepage-content .homepage-content-right .posts .post .post-comments .post-comment .post-comment-comment {
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    align-items: flex-start
+                                }
+
+                                    .homepage-content .homepage-content-right .posts .post .post-comments .post-comment .post-comment-comment img {
+                                        border-radius: 50%;
+                                        margin: 0 10px 0 0;
+                                    }
+
+                                    .homepage-content .homepage-content-right .posts .post .post-comments .post-comment .post-comment-comment .commentarea {
+                                        background: #e0e0e0;
+                                        width: 100%;
+                                        padding: 1% 2%;
+                                        display: inline-block;
+                                        border-radius: 10px;
+                                    }
+
+                            .homepage-content .homepage-content-right .posts .post .post-comments .create-comment {
+                                width: 100%;
+                                padding: 10px 0 10px 0;
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: flex-start
+                            }
+
+                                .homepage-content .homepage-content-right .posts .post .post-comments .create-comment img {
+                                    border-radius: 50%;
+                                    margin: 0 10px 0 0;
+                                }
+
+                                .homepage-content .homepage-content-right .posts .post .post-comments .create-comment textarea {
+                                    width: 100%;
+                                    border: none;
+                                    background: #f5f5f5;
+                                    border-radius: 10px;
+                                    padding: 1% 2%;
+                                }
+    </style>
+}
+
+
+<div class="homepage-content">
+
+    <div class="homepage-content-left">
+        <a href=""><i class="fas fa-home"></i> Homepage</a>
+        <a href="/friends"><i class="fas fa-user-friends"></i> Friends</a>
+        <a href="/messages"><i class="fas fa-sticky-note"></i> Messages</a>
+        <a href="/profile"><i class="fas fa-user-circle"></i> Profile</a>
+        <a href="/settings"><i class="fas fa-cog"></i> Settings</a>
+    </div>
+    <div class="homepage-content-right">
+        <div class="create-post">
+            <div class="postarea">
+                <img src="~/images/@Model.PPPath" alt="PP" width="60" height="60">
+                <textarea id="txtcreatepost" placeholder="Create post.."></textarea>
+            </div>
+            <input id="uploadimage" type="file" accept="image/x-png,image/gif,image/jpeg" />
+            <button id="create-post-button">Send</button>
+        </div>
+        <div class="posts">
+            @foreach (var item in Model.PostModel)
+            {
+                <div class="post" value="@item.Id">
+                    <div class="post-header">
+                        <img src="~/images/@item.User.PhotoPath"
+                             alt="PP" width="50" height="50">
+                        <div post-username>
+                            <h3><a href="/profile/@item.User.Username">@item.User.Name  @item.User.Surname</a></h3>
+                            <span>@item.GetTimeFormat(DateTime.Now.Subtract(item.Time)) </span>
+                        </div>
+
+                    </div>
+                    <div class="post-content">
+                        <p>@item.Text</p>
+                        @if (item.PhotoPath != null)
+                        {
+                            <img src="~/images/@item.PhotoPath"
+                                 alt="PP" width="100%%" height="100%">
+                        }
+
+
+                    </div>
+                    <div class="post-buttons">
+                        @if (item.LikeDislikes.Where(c => c.UserId == Model.UserId && c.LikeOrDislike).Count() == 0)
+                        {
+                            <button class="like">Like(@item.LikeDislikes.Where(s => s.LikeOrDislike).Count())</button> }
+                        else
+                        {
+                            <button class="like active">Like(@item.LikeDislikes.Where(s => s.LikeOrDislike).Count())</button>
+
+                        }
+                        @if (item.LikeDislikes.Where(c => c.UserId == Model.UserId && !c.LikeOrDislike).Count() == 0)
+                        {
+                            <button class="dislike">DisLike(@item.LikeDislikes.Where(s => !s.LikeOrDislike).Count())</button>
+
+                        }
+                        else
+                        {
+                            <button class="dislike active">DisLike(@item.LikeDislikes.Where(s => !s.LikeOrDislike).Count())</button>
+
+                        }
+
+                        <button class="btncomments">Comments(@item.Comments.Count())</button>
+
+
+
+
+                    </div>
+                    <div class="post-comments">
+                        @foreach (var k in item.Comments)
+                        {
+                            <div class="post-comment">
+                                <div class="post-comment-comment">
+                                    <img src="~/images/@k.User.PhotoPath"
+                                         alt="PP" width="30" height="30">
+                                    <div class="commentarea"><a href="/profile/@k.User.Username">@k.User.Name  @k.User.Surname</a> <span>@k.Text</span></div>
+                                </div>
+                                <div class="post-comment-buttons">
+                                    <a id="like" href="">Like(@k.Like)</a>
+                                    <a id="dislike" href="">Dislike(@k.Dislike)</a>
+
+                                </div>
+
+                            </div>
+                        }
+
+                        <div class="create-comment">
+                            <img src="~/images/@item.User.PhotoPath"
+                                 alt="PP" width="30" height="30">
+                            <textarea class="txtareacomment" itemid="@item.Id" placeholder="Write comment..."></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            var token = $('[name=__RequestVerificationToken]').val();
+
+
+            $(document).on('keypress', '.txtareacomment', function (event) {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                var text = $(this).val();
+                var postComments = $(this).parent().parent();
+                var postId = $(this).attr('itemid');
+
+                if (keycode == '13') {
+
+                    if (event.shiftKey) {
+
+                        console.log("shiftenter");
+                    } else {
+                        console.log(text);
+                        $.ajax({
+                            url: '/Home/InsertComment',
+                            type: 'POST',
+                            data: { __RequestVerificationToken: token, postId: postId, text: text },
+                            success: function (result) {
+                                postComments.prepend("<div class='post-comment'>" +
+                                    "<div class= 'post-comment-comment'>" +
+                                    "<img src='images/" + result.photoPath + "'" +
+                                    "alt='' width='30' height='30'>" +
+                                    "<div class='commentarea'><a href=''>" + result.nameSurname + "</a> <span>" + result.text + "</span></div>" +
+                                    "</div>" +
+                                    "<div class='post-comment-buttons'>" +
+                                    "<a href=''>Like</a>" +
+                                    "<a href=''>Dislike</a>" +
+                                    "</div>");
+                            }
+                        });
+                        $(this).val('');
+
+
+                    }
+                }
+            });
+
+            $("#create-post-button").click(function () {
+                var txtContent = $("#txtcreatepost").val();
+                var fileUpload = $("#uploadimage").get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                formData.append('file', files[0]);
+                formData.append('text', txtContent);
+                formData.append('__RequestVerificationToken', token);
+
+                $.ajax({
+                    url: '/Home/InsertPost',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        console.log(result);
+                        $("#txtcreatepost").val('');
+                        $(".posts").prepend("<div class='post' value='" + result.id + "'> <div class='post-header'>" +
+
+                            " <img src='/images/" + result.ppPath + "'" +
+                            "alt='PP' width='50' height='50'>" +
+                            "<div post-username>" +
+                            "<h3>" + result.nameSurname + "</h3>" +
+                            "<span>" + result.time + "</span>" +
+                            "</div> </div >" +
+                            "<div class='post-content'>" +
+                            "<p>" + result.text + "</p>" +
+                            (result.photoPath != null ? "<img src='/images/" + result.photoPath + "'" +
+                                "alt = 'PP' width = '100%%' height = '100%' >" : '') +
+                            "</div>" +
+                            "<div class='post-buttons'>" +
+                            "<button class='like'>Like(" + result.likeCount + ")</button>" +
+                            "<button class='dislike'>DisLike(" + result.dislikeCount + ")</button>" +
+                            "<button>Comments(" + result.commentCount + ")</button>" +
+                            "</div>" +
+                            "<div class='post-comments'>" +
+                            "<div class='create-comment'>" +
+                            " <img src=''" +
+                            "alt='PP' width='30' height='30'>" +
+                            "<textarea placeholder='Write comment...'></textarea>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>");
+                    }
+                });
+
+            });
+
+            $(document).on('click', '.like', function () {
+                var thisobj = $(this);
+                var otherobj = $(this).parent().children('.dislike');
+
+                var userId = parseInt($(this).parent().parent().attr('value'), 10);
+                $.ajax({
+                    url: '/Home/LikeDislike',
+                    type: 'POST',
+                    data: { __RequestVerificationToken: token, id: userId, likeordislike: true },
+                    success: function (result) {
+                        thisobj.html("Like(" + result.likeCount + ")");
+                        otherobj.html("Dislike(" + result.dislikeCount + ")");
+
+                        if (result.status == 1) {
+                            thisobj.addClass('active');
+                        }
+                        else if (result.status == 2) {
+                            otherobj.removeClass('active');
+                            thisobj.addClass('active');
+                        }
+                        else if (result.status == 0) {
+                            thisobj.removeClass('active');
+                        }
+
+
+                        console.log(result);
+                    }
+                });
+
+
+
+            });
+
+            $(document).on('click', '.dislike', function () {
+                var thisobj = $(this);
+                var otherobj = $(this).parent().children('.like');
+
+                var userId = parseInt($(this).parent().parent()[0].getAttribute('value'), 10);
+
+                $.ajax({
+                    url: '/Home/LikeDislike',
+                    type: 'POST',
+                    data: { __RequestVerificationToken: token, id: userId, likeordislike: false },
+                    success: function (result) {
+                        thisobj.html("Dislike(" + result.dislikeCount + ")");
+                        otherobj.html("Like(" + result.likeCount + ")");
+
+                        if (result.status == 1) {
+                            thisobj.addClass('active');
+                        }
+                        else if (result.status == 2) {
+                            otherobj.removeClass('active');
+                            thisobj.addClass('active');
+                        }
+                        else if (result.status == 0) {
+                            thisobj.removeClass('active');
+                        }
+
+
+                        console.log(result);
+                    }
+                });
+
+
+
+            });
+
+
+            $(document).on('click', '.btncomments', function () {
+                $(this).parent().parent().children(".post-comments").children(".create-comment").children(".txtareacomment").focus();
+            })
+
+
+
+
+        });
+    </script>
+}

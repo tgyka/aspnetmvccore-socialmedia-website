@@ -1,0 +1,294 @@
+﻿@model SocialMedia.Model.User
+@{
+    ViewData["Title"] = "Profile";
+}
+@section styles {
+    <style>
+        .profile {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+        }
+
+            .profile .profile-left {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                text-align: center;
+                padding: 10%;
+            }
+
+                .profile .profile-left img {
+                    border-radius: 50%;
+                    border: 5px solid #39a6d6;
+                }
+
+                .profile .profile-left .profile-left-header {
+                    line-height: 1;
+                    padding: 3% 0;
+                }
+
+                    .profile .profile-left .profile-left-header a {
+                        font-size: small;
+                    }
+
+                    .profile .profile-left .profile-left-header h2 {
+                        margin: 0;
+                    }
+
+                .profile .profile-left .profile-left-bio {
+                    padding: 3% 0;
+                }
+
+                .profile .profile-left .profile-left-info {
+                    display:grid;
+                    grid-gap:1px;
+                }
+
+                .profile .profile-left .profile-left-info a {
+                    text-decoration:none;
+                }
+
+
+
+             
+
+            .profile .profile-right {
+                width: 100%;
+                min-height: 80vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
+                .profile .profile-right .profile-right-info {
+                    width: 80%;
+                    background: #fff;
+                    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+                    border-radius: 5px;
+                    padding: 1% 5%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 30px;
+                }
+
+
+                    .profile .profile-right .profile-right-info div {
+                        padding:0 10%;
+                        display:flex;
+                        flex-direction:column;
+                        justify-content:center;
+                        align-items:center;
+                        font-size:large;
+
+                    }
+
+                        .profile .profile-right .profile-right-info div:hover {
+                            background: #e0e0e0;
+                            border-radius: 10px;
+                        }
+                        .profile .profile-right .posts {
+                        width: 100%;
+                    }
+
+                    .profile .profile-right .posts .post {
+                        width: 80%;
+                        min-height: 10vh;
+                        background: #fff;
+                        padding: 5% 10% 5% 10%;
+                        margin: 20px 0 0 0;
+                        border-radius: 5px;
+                    }
+
+                        .profile .profile-right .posts .post .post-header {
+                            width: 100%;
+                            line-height: 1;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                        }
+
+
+
+                            .profile .profile-right .posts .post .post-header h3 {
+                                margin: 0;
+                            }
+
+
+                            .profile .profile-right .posts .post .post-header img {
+                                border-radius: 50%;
+                                margin: 0 5px 0 0;
+                            }
+
+                        .profile .profile-right .posts .post .post-content {
+                            padding: 1% 0 1% 0;
+                        }
+
+                        .profile .profile-right .posts .post .post-buttons {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                            .profile .profile-right .posts .post .post-buttons button {
+                                display: block;
+                                width: 33%;
+                                padding: 1% 0 1% 0;
+                                border-radius: 5px;
+                                text-align: center;
+                                border: none;
+                            }
+
+
+                                .profile .profile-right .posts .post .post-buttons button:hover {
+                                    background: #fff;
+                                }
+
+                        .profile .profile-right .posts .post .post-comments {
+                            margin: 10px 0 0 0;
+                            width: 100%;
+                        }
+
+                            .profile .profile-right .posts .post .post-comments .post-comment {
+                                width: 100%;
+                                padding: 10px 0 10px 0;
+                            }
+
+                                .profile .profile-right .posts .post .post-comments .post-comment .post-comment-comment {
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    align-items: flex-start
+                                }
+
+                                    .profile .profile-right .posts .post .post-comments .post-comment .post-comment-comment img {
+                                        border-radius: 50%;
+                                        margin: 0 10px 0 0;
+                                    }
+
+                                    .profile .profile-right .posts .post .post-comments .post-comment .post-comment-comment .commentarea {
+                                        background: #e0e0e0;
+                                        width: 100%;
+                                        padding: 1% 2%;
+                                        display: inline-block;
+                                        border-radius: 10px;
+                                    }
+
+                            .profile .profile-right .posts .post .post-comments .create-comment {
+                                width: 100%;
+                                padding: 10px 0 10px 0;
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: flex-start
+                            }
+
+                                .profile .profile-right .posts .post .post-comments .create-comment img {
+                                    border-radius: 50%;
+                                    margin: 0 10px 0 0;
+                                }
+
+                                .profile .profile-right .posts .post .post-comments .create-comment textarea {
+                                    width: 100%;
+                                    border: none;
+                                    background: #e0e0e0;
+                                    border-radius: 10px;
+                                    padding: 1% 2%;
+                                }
+    </style>
+}
+
+
+<div class="profile">
+
+    <div class="profile-left">
+        <img src="~/images/@Model.PhotoPath" alt="PP" width="200" height="200">
+        <div class="profile-left-header">
+            <h2>@Model.Name @Model.Surname </h2>
+            <a href="/profile/@Model.Username">@@@Model.Username</a>
+        </div>
+        <div class="profile-left-bio">
+            <span>
+                @Model.Bio
+            </span>
+        </div>
+        <div class="profile-left-info">
+            <span>@Model.Location</span>
+            <span>Haziran 2020 tarihinde katıldı</span>
+        </div>
+
+
+    </div>
+    <div class="profile-right">
+        <div class="profile-right-info">
+            <div>
+                <span>Posts</span>
+                <span>@Model.Posts.Count()</span>
+            </div>
+            <div>
+                <span>Friends</span>
+                <span>@(Model.FromFriends.Count() + Model.ToFriends.Count())</span>
+            </div>
+            <div>
+                <span>Followers</span>
+                <span>@Model.ToFriends.Where(c => c.Status == 2).Count()</span>
+            </div>
+          
+        </div>
+        <div class="posts">
+            @foreach (var item in Model.Posts.OrderByDescending(c => c.Time))
+            {
+                <div class="post" value="@Model.Id">
+                    <div class="post-header">
+                        <img src="~/images/@Model.PhotoPath"
+                             alt="PP" width="50" height="50">
+                        <div post-username>
+                            <h3><a href="/profile/@Model.Username">@Model.Name  @Model.Surname</a></h3>
+                            <span>@DateTime.Now.Subtract(item.Time).ToString() </span>
+                        </div>
+
+                    </div>
+                    <div class="post-content">
+                        <p>@item.Text</p>
+                        @if (item.PhotoPath != null)
+                        {
+                            <img src="~/images/@item.PhotoPath"
+                                 alt="PP" width="100%%" height="100%">
+                        }
+
+
+                    </div>
+                   
+                    <div class="post-comments">
+                        @foreach (var k in item.Comments)
+                        {
+                            <div class="post-comment">
+                                <div class="post-comment-comment">
+                                    <img src="~/images/@k.User.PhotoPath"
+                                         alt="PP" width="30" height="30">
+                                    <div class="commentarea"><a href="/profile/@k.User.Username">@k.User.Name  @k.User.Surname</a> <span>@k.Text</span></div>
+                                </div>
+                                <div class="post-comment-buttons">
+                                    <a id="like" href="">Like(@k.Like)</a>
+                                    <a id="dislike" href="">Dislike(@k.Dislike)</a>
+
+                                </div>
+
+                            </div>
+                        }
+
+                       
+                    </div>
+
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+
+</div>

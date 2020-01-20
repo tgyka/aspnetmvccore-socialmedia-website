@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SocialMedia.Web</title>
+    <script src="https://kit.fontawesome.com/33f3ffc731.js"
+            crossorigin="anonymous"></script>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    </environment>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial,sans-serif;
+        background: #f6f5f7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: -20px 0 50px;
+    }
+
+    .login-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 30px;
+        padding: 3%;
+        background: #fff;
+        border-radius: 10px;
+    }
+
+        .login-container .form-container.sign-in-container form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container .form-container.sign-up-container form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container .form-container form input {
+            margin: 5px 0;
+        }
+
+        .login-container .form-container form button {
+            padding: 2%;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background: #4e7cab;
+        }
+
+        .login-container .form-container form button:hover {
+           
+            background: gray;
+        }
+</style>
+
+<body>
+    <div class="login-container">
+        <div class="form-container sign-in-container">
+            <form asp-action="Login" asp-controller="Account" method="post">
+                @Html.AntiForgeryToken()
+                <h1>Sign in</h1>
+
+                <input type="text" name="Username" class="form-control" value="" placeholder="Username" />
+                <input type="password" name="Password" class="form-control" value="" placeholder="Password" />
+                <button type="submit">Sign In</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-up-container">
+            <form asp-action="Register" asp-controller="Account" method="post">
+                @Html.AntiForgeryToken()
+
+                <h1>Create Account</h1>
+
+                <input type="text" name="Username" class="form-control" placeholder="Username" />
+                <input type="text" name="Name" class="form-control" placeholder="Name" />
+                <input type="text" name="Surname" class="form-control" placeholder="Surname" />
+                <input type="email" name="Email" class="form-control" placeholder="Email" />
+                <input type="password" name="Password" class="form-control" placeholder="Password" />
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+
+    <footer></footer>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+<script>
+
+</script>
+</html>
+
+
