@@ -37,6 +37,9 @@ namespace SocialMedia.Web
                     }
                 );
 
+
+            services.AddDbContext<SocialMediaDbContext>();
+
             services.AddSession();
             services.AddHttpContextAccessor();
 

@@ -6,61 +6,44 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SocialMedia.Application.User;
 using SocialMedia.Data;
 
 namespace SocialMedia.Web.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
-        SocialMediaDbContext _dbcontext;
-        int UserId;
-        IHttpContextAccessor _httpContextAccessor;
+        private readonly int _userId;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserService _userService;
 
-
-
-        public ProfileController(IHttpContextAccessor httpContextAccessor)
+        public ProfileController(IHttpContextAccessor httpContextAccessor,
+            IUserService userService)
         {
             _httpContextAccessor = httpContextAccessor;
-
-            _dbcontext = new SocialMediaDbContext();
-
             var cookievalue = _httpContextAccessor.HttpContext.Request.Cookies["UserId"];
-            UserId = Int32.Parse(cookievalue);
+            _userId = Int32.Parse(cookievalue);
+
+            _userService = userService;
+
         }
 
-        [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            try
-            {
-                var model = _dbcontext.User.Include(s => s.ToFriends).Include(s => s.FromFriends).Include(s => s.Posts)
-                .ThenInclude(s => s.Comments).ThenInclude(s => s.User).Single(s => s.Id == UserId);
 
+            var userModel = await _userService.GetUserWithFriendsByUserId(_userId);
 
-                return View(model);
-            }
-            catch(Exception e)
-            {
-                return null;
-            }
+            return View(userModel);
         }
 
-        [Authorize]
         [Route("/profile/{username}")]
-        public IActionResult Index(string username)
+        public async Task<IActionResult> Index(string userName)
         {
-            try
-            {
-                var model = _dbcontext.User.Include(s => s.ToFriends).Include(s => s.FromFriends).Include(s => s.Posts)
-                .ThenInclude(s => s.Comments).ThenInclude(s => s.User).Single(s => s.Username == username);
 
+            var userModel = await _userService.GetUserWithFriendsByUsername(userName);
 
-                return View(model);
-            }
-            catch(Exception e)
-            {
-                return null;
-            }
+            return View(userModel);
         }
     }
 }

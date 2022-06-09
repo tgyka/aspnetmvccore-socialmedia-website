@@ -12,10 +12,18 @@ namespace SocialMedia.Model
 
         public int FromUserId { get; set; }
 
-        public int Status { get; set; }
+        public FriendStatus Status { get; set; }
 
         public virtual User ToUser { get; set; }
 
         public virtual User FromUser { get; set; }
+    }
+
+    public enum FriendStatus 
+    {
+        Declined,
+        Accepted,
+        Pending,
+        Removed
     }
 }

@@ -6,50 +6,45 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SocialMedia.Application.User;
 using SocialMedia.Data;
 using SocialMedia.Model;
 using SocialMedia.Web.Models;
 
 namespace SocialMedia.Web.Controllers
 {
+    [Authorize]
     public class SearchController : Controller
     {
-        SocialMediaDbContext _dbcontext;
-        int UserId;
-        IHttpContextAccessor _httpContextAccessor;
+        private readonly int _userId;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserService _userService;
 
-
-        public SearchController(IHttpContextAccessor httpContextAccessor)
+        public SearchController(IHttpContextAccessor httpContextAccessor,
+            IUserService userService)
         {
             _httpContextAccessor = httpContextAccessor;
-
-            _dbcontext = new SocialMediaDbContext();
-
             var cookievalue = _httpContextAccessor.HttpContext.Request.Cookies["UserId"];
-            UserId = Int32.Parse(cookievalue);
+            _userId = Int32.Parse(cookievalue);
+
+            _userService = userService;
+
         }
 
         [HttpGet]
-        [Authorize]
-        public IActionResult Index(string searchtext)
+        public async Task<IActionResult> Index(string searchText)
         {
-            try
+
+            var searchResult = await _userService.SearchUser(searchText);
+
+            SearchIndex model = new SearchIndex()
             {
-                var userlist = _dbcontext.User.Include(s => s.FromFriends).ThenInclude(s => s.FromUser).Include(s => s.ToFriends)
-                .ThenInclude(s => s.ToUser).Where(c => c.Name.Contains(searchtext) || c.Surname.Contains(searchtext) || c.Username.Contains(searchtext));
-                SearchIndex model = new SearchIndex()
-                {
-                    Model = userlist.ToList(),
-                    UserId = UserId
-                };
+                Model = searchResult,
+                UserId = _userId
+            };
 
 
-                return View(model);
-            }
-            catch(Exception e)
-            {
-                return null;
-            }
+            return View(model);
         }
     }
 }

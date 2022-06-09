@@ -10,101 +10,95 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialMedia.Data;
 using SocialMedia.Web.Models;
+using SocialMedia.Application.User;
 
 namespace SocialMedia.Web.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class AccountController : Controller
     {
-        SocialMediaDbContext _dbcontext = new SocialMediaDbContext();
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserService _userService;
 
-        private static int UserId;
-        IHttpContextAccessor _httpContextAccessor;
-
-        public AccountController(IHttpContextAccessor httpContextAccessor)
+        public AccountController(IHttpContextAccessor httpContextAccessor, IUserService userService)
         {
             _httpContextAccessor = httpContextAccessor;
-
+            _userService = userService;
         }
 
-        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult Register(RegisterModel registerModel)
+        public async Task<IActionResult> Register(RegisterModel registerModel)
         {
-            try
+
+            var userHasExist = await _userService.UserHasExist(registerModel.Username);
+
+            if (!userHasExist)
             {
-                if(_dbcontext.User.Where(c=> c.Username == registerModel.Username).Count() == 0 )
+
+                var userModel = new Model.User
                 {
-                    _dbcontext.User.Add(new Model.User()
-                    {
-                        Username = registerModel.Username,
-                        Password = registerModel.Password,
-                        Email = registerModel.Email,
-                        Name = registerModel.Name,
-                        Surname = registerModel.Surname,
-                        PhotoPath = "default-pp.jpg"
+                    Username = registerModel.Username,
+                    Password = registerModel.Password,
+                    Email = registerModel.Email,
+                    Name = registerModel.Name,
+                    Surname = registerModel.Surname,
+                    PhotoPath = "default-pp.jpg"
+                };
 
-                    });
+                await _userService.AddUser(userModel);
 
-                    _dbcontext.SaveChanges();
-                }
-
-              
-
-                return RedirectToAction("Login", "Account");
             }
-
-            catch (Exception e)
+            else
             {
-                return null;
+                throw new Exception("User has exist");
             }
+
+            return RedirectToAction("Login", "Account");
         }
+    
+
 
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            try
+
+            var userHasLogin = await _userService.LoginUser(loginModel.Username, loginModel.Password);
+
+            if (userHasLogin)
             {
-                if (LoginUser(loginModel.Username, loginModel.Password))
+                var claims = new List<Claim>
                 {
-                    var claims = new List<Claim>
+                    new Claim(ClaimTypes.Name, loginModel.Username)
+                };
+
+                var userId = await _userService.GetUserIdByUserName(loginModel.Username);
+
+                var userIdentity = new ClaimsIdentity(claims, "cookie");
+
+                HttpContext.Response.Cookies.Delete("CookieSchema");
+
+                ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+                await _httpContextAccessor.HttpContext.SignInAsync("CookieSchema", principal);
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("UserId", userId.ToString());
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
             {
-                new Claim(ClaimTypes.Name, loginModel.Username)
-            };
-                    UserId = _dbcontext.User.Single(c => c.Username == loginModel.Username).Id;
-
-                    var userIdentity = new ClaimsIdentity(claims, "cookie");
-
-
-                    HttpContext.Response.Cookies.Delete("CookieSchema");
-
-                    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
-
-                    await _httpContextAccessor.HttpContext.SignInAsync("CookieSchema", principal);
-                    _httpContextAccessor.HttpContext.Response.Cookies.Append("UserId", UserId.ToString());
-
-
-                    //Just redirect to our index after logging in. 
-                    return RedirectToAction("Index", "Home");
-                }
                 return View();
             }
-            catch (Exception e)
-            {
-                return null;
-            }
+
         }
 
         [Authorize]
-        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> LogOut()
         {
@@ -113,18 +107,5 @@ namespace SocialMedia.Web.Controllers
             return RedirectToAction("Login");
         }
 
-
-        private bool LoginUser(string username, string password)
-        {
-            var count = _dbcontext.User.Where(c => c.Username == username && c.Password == password).Count();
-
-            return count > 0 ? true : false;
-
-        }
-
-        public static int GetUserId()
-        {
-            return UserId;
-        }
     }
 }

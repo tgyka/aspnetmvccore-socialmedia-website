@@ -134,7 +134,7 @@
                 $.ajax({
                     url: '/Friends/Friends',
                     type: 'POST',
-                    data: { __RequestVerificationToken: token, targetId: targetId, status: -1 },
+                    data: { __RequestVerificationToken: token, targetId: targetId, status: 3 },
                     success: function (result) {
                         button.removeClass('btnremove');
                         button.addClass('btnadd');

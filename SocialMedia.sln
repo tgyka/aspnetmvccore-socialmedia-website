@@ -1,16 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia.Web", "SocialMedia.Web\SocialMedia.Web.csproj", "{F7C896D0-F747-41F4-8C48-EBD9F1ED325E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialMedia.Web", "SocialMedia.Web\SocialMedia.Web.csproj", "{F7C896D0-F747-41F4-8C48-EBD9F1ED325E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0EBF9AED-7604-4678-A46D-A636495B41CD} = {0EBF9AED-7604-4678-A46D-A636495B41CD}
+		{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6} = {8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}
+		{AF96AD3C-03B5-4476-9220-5067B0B42358} = {AF96AD3C-03B5-4476-9220-5067B0B42358}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia.Model", "SocialMedia.Model\SocialMedia.Model.csproj", "{337093D4-07F6-4961-A082-8A9DA6F404D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialMedia.Model", "SocialMedia.Model\SocialMedia.Model.csproj", "{337093D4-07F6-4961-A082-8A9DA6F404D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia.Data", "SocialMedia.Data\SocialMedia.Data.csproj", "{0EBF9AED-7604-4678-A46D-A636495B41CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialMedia.Data", "SocialMedia.Data\SocialMedia.Data.csproj", "{0EBF9AED-7604-4678-A46D-A636495B41CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialMedia.Application", "SocialMedia.Application\SocialMedia.Application.csproj", "{AF96AD3C-03B5-4476-9220-5067B0B42358}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0EBF9AED-7604-4678-A46D-A636495B41CD} = {0EBF9AED-7604-4678-A46D-A636495B41CD}
+		{337093D4-07F6-4961-A082-8A9DA6F404D1} = {337093D4-07F6-4961-A082-8A9DA6F404D1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia.Helper", "SocialMedia.Helper\SocialMedia.Helper.csproj", "{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +40,14 @@ Global
 		{0EBF9AED-7604-4678-A46D-A636495B41CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EBF9AED-7604-4678-A46D-A636495B41CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EBF9AED-7604-4678-A46D-A636495B41CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF96AD3C-03B5-4476-9220-5067B0B42358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF96AD3C-03B5-4476-9220-5067B0B42358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF96AD3C-03B5-4476-9220-5067B0B42358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF96AD3C-03B5-4476-9220-5067B0B42358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

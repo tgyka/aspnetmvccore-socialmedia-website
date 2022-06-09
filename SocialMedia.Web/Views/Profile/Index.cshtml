@@ -233,7 +233,7 @@
             </div>
             <div>
                 <span>Followers</span>
-                <span>@Model.ToFriends.Where(c => c.Status == 2).Count()</span>
+                <span>@Model.ToFriends.Where(c => c.Status == SocialMedia.Model.FriendStatus.Pending).Count()</span>
             </div>
           
         </div>

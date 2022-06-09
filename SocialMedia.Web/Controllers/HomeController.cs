@@ -13,212 +13,202 @@ using Microsoft.EntityFrameworkCore;
 using SocialMedia.Data;
 using SocialMedia.Model;
 using SocialMedia.Web.Models;
-
+using SocialMedia.Application.Post;
+using SocialMedia.Application.User;
+using SocialMedia.Helper;
+using SocialMedia.Application.LikeDislike;
+using SocialMedia.Application.Comment;
 
 namespace SocialMedia.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        SocialMediaDbContext _dbcontext;
-        int UserId;
-        IHttpContextAccessor _httpContextAccessor;
-
-
+        private readonly int _userId;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IPostService _postService;
+        private readonly IUserService _userService;
+        private readonly ILikeDislikeService _likeDislikeService;
+        private readonly ICommentService _commentService;
         private readonly IHostingEnvironment _environment;
 
-        public HomeController(IHostingEnvironment environment, IHttpContextAccessor httpContextAccessor)
+        public HomeController(IHostingEnvironment environment, 
+            IHttpContextAccessor httpContextAccessor,
+            IPostService postService,
+            IUserService userService,
+            ILikeDislikeService likeDislikeService,
+            ICommentService commentService)
         {
             _httpContextAccessor = httpContextAccessor;
-
             _environment = environment;
-            _dbcontext = new SocialMediaDbContext();
 
             var cookievalue = _httpContextAccessor.HttpContext.Request.Cookies["UserId"];
-            UserId = Int32.Parse(cookievalue);
+            _userId = Int32.Parse(cookievalue);
+
+            _postService = postService;
+            _userService = userService;
+            _likeDislikeService = likeDislikeService;
+            _commentService = commentService;
         }
 
-        [Authorize]
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-           try
+            var postList = await _postService.GetPosts(_userId);
+
+            var photoPath = await _userService.GetPhotoPath(_userId);
+
+
+            HomeIndexModel model = new HomeIndexModel()
             {
-                var postlist = _dbcontext.Post.Include(s => s.Comments).ThenInclude(sa => sa.User).Include(s => s.User).ThenInclude(saa => saa.FromFriends)
-               .Include(s => s.User).ThenInclude(saa => saa.ToFriends).Include(s => s.LikeDislikes)
-               .Where(c => c.User.ToFriends.Where(k => k.FromUserId == UserId && k.Status == 1).Count() != 0
-               || c.User.FromFriends.Where(k => k.ToUserId == UserId && k.Status == 1).Count() != 0 || c.User.Id == UserId)
-               .OrderByDescending(c => c.Time).ToList();
+                PostModel = postList,
+                UserId = _userId,
+                PPPath = photoPath
+            };
 
-                HomeIndexModel model = new HomeIndexModel()
-                {
-                    PostModel = postlist,
-                    UserId = UserId,
-                    PPPath = _dbcontext.User.Single(c => c.Id == UserId).PhotoPath
-                };
-
-                return View(model);
-            }
-            catch(Exception e)
-            {
-                return null;
-            }
-
+            return View(model);
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        [Authorize]
-
-        public InsertPostModel InsertPost(string text, IFormFile file)
+        public async Task<InsertPostModel> InsertPost(string text, IFormFile file)
         {
-            try
+
+            string fileName = null;
+
+            if (file != null)
             {
-                string fileName = null;
-
-                if (file != null)
-                {
-                    string uploadsFolder = Path.Combine(_environment.WebRootPath, "images");
-                    fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                    string filePath = Path.Combine(uploadsFolder, fileName);
-                    file.CopyTo(new FileStream(filePath, FileMode.Create));
-                }
-
-                Post obj = new Post()
-                {
-                    Text = text,
-                    PhotoPath = fileName,
-                    UserId = UserId,
-
-                    Time = DateTime.Now
-
-                };
-
-
-                _dbcontext.Post.Add(obj);
-
-                _dbcontext.SaveChanges();
-                var user = _dbcontext.User.Single(c => c.Id == obj.UserId);
-                InsertPostModel model = new InsertPostModel()
-                {
-                    Id = obj.Id,
-                    NameSurname = user.Name + " " + user.Surname,
-                    PPPath = user.PhotoPath,
-                    Time = obj.Time,
-                    Text = obj.Text,
-                    PhotoPath = obj.PhotoPath,
-                    LikeCount = _dbcontext.LikeDislike.Where(c => c.PostId == obj.Id && c.LikeOrDislike).Count(),
-                    DislikeCount = _dbcontext.LikeDislike.Where(c => c.PostId == obj.Id && !c.LikeOrDislike).Count(),
-                    CommentCount = obj.Comments.Count
-                };
-
-
-                return model;
-
+                fileName = await FileHelper.UploadFile(_environment,file);
             }
-            catch (Exception e)
+
+            Post postModel = new Post
             {
-                return null;
-            }
+                Text = text,
+                PhotoPath = fileName,
+                UserId = _userId,
+                Time = DateTime.Now
+            };
+
+            await _postService.AddPost(postModel);
+
+
+            var user = await _userService.GetUser(postModel.UserId);
+
+            var likeCount = await _likeDislikeService.GetLikeCount(postModel.Id);
+
+            var dislikeCount = await _likeDislikeService.GetDislikeCount(postModel.Id);
+
+            InsertPostModel model = new InsertPostModel()
+            {
+                Id = postModel.Id,
+                NameSurname = user.Name + " " + user.Surname,
+                PPPath = user.PhotoPath,
+                Time = postModel.Time,
+                Text = postModel.Text,
+                PhotoPath = postModel.PhotoPath,
+                LikeCount = likeCount,
+                DislikeCount = dislikeCount,
+                CommentCount = postModel.Comments.Count
+            };
+
+            return model;
+
+        }
+       
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<InsertCommentModel> InsertComment(int postId, string text)
+        {
+
+            Comment commentModel = new Comment
+            {
+                Text = text,
+                PostId = postId,
+                UserId = _userId,
+                Like = 0,
+                Dislike = 0,
+                Time = DateTime.Now
+            };
+
+            await _commentService.AddComment(commentModel);
+
+            var user = await _userService.GetUser(commentModel.UserId);
+
+
+            InsertCommentModel model = new InsertCommentModel()
+            {
+                NameSurname = user.Name + " " + user.Surname,
+                PhotoPath = user.PhotoPath,
+                Text = commentModel.Text
+            };
+
+            return model;
 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-
-        public InsertCommentModel InsertComment(int postId, string text)
+        public async Task<LikeDislikeModel> LikeDislike(int postId, bool likeDislikeBoolValue)
         {
-           try
+
+            var likeDislike = await _likeDislikeService.GetLikeDislike(_userId, postId);
+            int status;
+
+            if (likeDislike == null)
             {
-                Comment comment = new Comment()
+
+                var likeDislikeModel = new LikeDislike
                 {
-                    Text = text,
                     PostId = postId,
-                    UserId = UserId,
-                    Like = 0,
-                    Dislike = 0,
-                    Time = DateTime.Now
+                    UserId = _userId,
+                    LikeOrDislike = likeDislikeBoolValue
 
                 };
 
-                _dbcontext.Comment.Add(comment);
-                _dbcontext.SaveChanges();
-                var user = _dbcontext.User.Single(c => c.Id == comment.UserId);
+                await _likeDislikeService.AddLikeDislike(likeDislikeModel);
 
-                InsertCommentModel model = new InsertCommentModel()
-                {
-                    NameSurname = user.Name + " " + user.Surname,
-                    PhotoPath = user.PhotoPath,
-                    Text = comment.Text
-                };
+                status = 1;
 
-                return model;
             }
-            catch(Exception e)
+            else
             {
-                return null;
-            }
-            
-
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-
-        public LikeDislikeModel LikeDislike(int id, bool likeordislike)
-        {
-            try
-            {
-                var likedislike = _dbcontext.LikeDislike.SingleOrDefault(c => c.PostId == id && c.UserId == UserId);
-                int status;
-
-                if (likedislike == null)
+                if (likeDislike.LikeOrDislike == likeDislikeBoolValue)
                 {
-                    _dbcontext.LikeDislike.Add(new LikeDislike()
-                    {
-                        PostId = id,
-                        UserId = UserId,
-                        LikeOrDislike = likeordislike
-
-                    });
-                    status = 1;
-
+                    await _likeDislikeService.RemoveLikeDislike(likeDislike.Id);
+                    status = 0;
                 }
-
                 else
                 {
-                    bool flag = likedislike.LikeOrDislike;
-                    if (flag == likeordislike)
+                    var likeDislikeModel = new LikeDislike
                     {
-                        _dbcontext.LikeDislike.Remove(likedislike);
-                        status = 0;
-                    }
-                    else
-                    {
-                        likedislike.LikeOrDislike = likeordislike;
-                        status = 2;
-                    }
+                        PostId = postId,
+                        UserId = _userId,
+                        LikeOrDislike = likeDislikeBoolValue
+
+                    };
+                        
+                    await _likeDislikeService.UpdateLikeDislike(likeDislikeModel);
+                    status = 2;
                 }
-
-
-                _dbcontext.SaveChanges();
-
-                LikeDislikeModel likedislikemodel = new LikeDislikeModel()
-                {
-                    LikeCount = _dbcontext.LikeDislike.Where(c => c.PostId == id && c.LikeOrDislike).Count(),
-                    DislikeCount = _dbcontext.LikeDislike.Where(c => c.PostId == id && !c.LikeOrDislike).Count(),
-                    Status = status
-                };
-
-
-                return likedislikemodel;
             }
-            catch(Exception e)
+
+            var likeCount = await _likeDislikeService.GetLikeCount(postId);
+
+            var dislikeCount = await _likeDislikeService.GetDislikeCount(postId);
+
+            LikeDislikeModel likedislikemodel = new LikeDislikeModel()
             {
-                return null;
-            }
+                LikeCount = likeCount,
+                DislikeCount = dislikeCount,
+                Status = status
+            };
 
+            return likedislikemodel;
         }
+
+
+        
 
 
 
