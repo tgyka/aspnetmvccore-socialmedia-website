@@ -55,45 +55,38 @@ namespace SocialMedia.Web.Controllers
         public async Task<bool> Friends (int targetId,FriendStatus status)
         {
 
-            try
+            if (status == FriendStatus.Pending)
             {
-                if (status == FriendStatus.Pending)
+
+                var friendModel = new Friend
                 {
+                    FromUserId = UserId,
+                    ToUserId = targetId,
+                    Status = status
+                };
 
-                    var friendModel = new Friend
-                    {
-                        FromUserId = UserId,
-                        ToUserId = targetId,
-                        Status = status
-                    };
+                await _friendService.AddFriend(friendModel);
 
-                    await _friendService.AddFriend(friendModel);
-
-                }
-                else if (status == FriendStatus.Accepted || status == FriendStatus.Declined)
-                {
-                    var friendModel = new Friend
-                    {
-                        FromUserId = UserId,
-                        ToUserId = targetId,
-                        Status = status
-                    };
-
-                    await _friendService.UpdateFriend(friendModel);
-
-                }
-                else if(status == FriendStatus.Removed)
-                {
-                    await _friendService.RemoveFriend(UserId, targetId);
-
-                }
-
-                return true;
             }
-            catch(Exception e)
+            else if (status == FriendStatus.Accepted || status == FriendStatus.Declined)
             {
-                throw e;
+                var friendModel = new Friend
+                {
+                    FromUserId = UserId,
+                    ToUserId = targetId,
+                    Status = status
+                };
+
+                await _friendService.UpdateFriend(friendModel);
+
             }
+            else if(status == FriendStatus.Removed)
+            {
+                await _friendService.RemoveFriend(UserId, targetId);
+
+            }
+
+            return true;
         }
     }
 }
