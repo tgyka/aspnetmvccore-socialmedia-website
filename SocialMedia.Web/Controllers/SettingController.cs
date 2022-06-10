@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialMedia.Application.User;
 using SocialMedia.Data;
-using SocialMedia.Helper;
+using SocialMedia.Helper.Crypto;
+using SocialMedia.Helper.File;
 using SocialMedia.Model;
 using SocialMedia.Web.Models;
 
@@ -21,11 +22,15 @@ namespace SocialMedia.Web.Controllers
         private readonly int _userId;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserService _userService;
+        private readonly IFileHelper _fileHelper;
+        private readonly ICryptoHelper _cryptoHelper;
         private readonly IHostingEnvironment _environment;
 
         public SettingController(IHostingEnvironment environment, 
             IHttpContextAccessor httpContextAccessor,
-            IUserService userService)
+            IUserService userService,
+            IFileHelper fileHelper,
+            ICryptoHelper cryptoHelper)
         {
             _httpContextAccessor = httpContextAccessor;
             _environment = environment;
@@ -34,6 +39,9 @@ namespace SocialMedia.Web.Controllers
             _userId = Int32.Parse(cookievalue);
 
             _userService = userService;
+
+            _fileHelper = fileHelper;
+            _cryptoHelper = cryptoHelper;
         }
 
         public IActionResult Index()
@@ -73,7 +81,7 @@ namespace SocialMedia.Web.Controllers
                 userModel.Surname = settings.Surname;
 
             if (userModel.Password != null)
-                userModel.Password = settings.Password;
+                userModel.Password = _cryptoHelper.Encrypt(settings.Password);
 
             if (settings.Email != null)
                 userModel.Email = settings.Email;
@@ -81,7 +89,7 @@ namespace SocialMedia.Web.Controllers
 
             if (settings.Photo != null)
             {
-                userModel.PhotoPath = await FileHelper.UploadFile(_environment, settings.Photo);
+                userModel.PhotoPath = await _fileHelper.UploadFile(_environment, settings.Photo);
             }
 
             userModel.Location = settings.Location;

@@ -15,9 +15,9 @@ using SocialMedia.Model;
 using SocialMedia.Web.Models;
 using SocialMedia.Application.Post;
 using SocialMedia.Application.User;
-using SocialMedia.Helper;
 using SocialMedia.Application.LikeDislike;
 using SocialMedia.Application.Comment;
+using SocialMedia.Helper.File;
 
 namespace SocialMedia.Web.Controllers
 {
@@ -30,6 +30,7 @@ namespace SocialMedia.Web.Controllers
         private readonly IUserService _userService;
         private readonly ILikeDislikeService _likeDislikeService;
         private readonly ICommentService _commentService;
+        private readonly IFileHelper _fileHelper;
         private readonly IHostingEnvironment _environment;
 
         public HomeController(IHostingEnvironment environment, 
@@ -37,7 +38,8 @@ namespace SocialMedia.Web.Controllers
             IPostService postService,
             IUserService userService,
             ILikeDislikeService likeDislikeService,
-            ICommentService commentService)
+            ICommentService commentService,
+            IFileHelper fileHelper)
         {
             _httpContextAccessor = httpContextAccessor;
             _environment = environment;
@@ -49,6 +51,7 @@ namespace SocialMedia.Web.Controllers
             _userService = userService;
             _likeDislikeService = likeDislikeService;
             _commentService = commentService;
+            _fileHelper = fileHelper;
         }
 
 
@@ -78,7 +81,7 @@ namespace SocialMedia.Web.Controllers
 
             if (file != null)
             {
-                fileName = await FileHelper.UploadFile(_environment,file);
+                fileName = await _fileHelper.UploadFile(_environment,file);
             }
 
             Post postModel = new Post

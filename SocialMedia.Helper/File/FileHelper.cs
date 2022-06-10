@@ -6,11 +6,11 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialMedia.Helper
+namespace SocialMedia.Helper.File
 {
-    public static class FileHelper
+    public class FileHelper : IFileHelper
     {
-        public static async Task<string> UploadFile(IHostingEnvironment environment , IFormFile file)
+        public async Task<string> UploadFile(IHostingEnvironment environment, IFormFile file)
         {
             try
             {

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialMedia.Data;
 using SocialMedia.Web.Models;
 using SocialMedia.Application.User;
+using SocialMedia.Helper.Crypto;
 
 namespace SocialMedia.Web.Controllers
 {
@@ -19,11 +20,15 @@ namespace SocialMedia.Web.Controllers
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserService _userService;
+        private readonly ICryptoHelper _cryptoHelper;
 
-        public AccountController(IHttpContextAccessor httpContextAccessor, IUserService userService)
+        public AccountController(IHttpContextAccessor httpContextAccessor, 
+            IUserService userService,
+            ICryptoHelper cryptoHelper)
         {
             _httpContextAccessor = httpContextAccessor;
             _userService = userService;
+            _cryptoHelper = cryptoHelper;
         }
 
         public IActionResult Login()
@@ -44,7 +49,7 @@ namespace SocialMedia.Web.Controllers
                 var userModel = new Model.User
                 {
                     Username = registerModel.Username,
-                    Password = registerModel.Password,
+                    Password = _cryptoHelper.Encrypt(registerModel.Password),
                     Email = registerModel.Email,
                     Name = registerModel.Name,
                     Surname = registerModel.Surname,
@@ -69,7 +74,7 @@ namespace SocialMedia.Web.Controllers
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
 
-            var userHasLogin = await _userService.LoginUser(loginModel.Username, loginModel.Password);
+            var userHasLogin = await _userService.LoginUser(loginModel.Username, _cryptoHelper.Encrypt(loginModel.Password));
 
             if (userHasLogin)
             {
