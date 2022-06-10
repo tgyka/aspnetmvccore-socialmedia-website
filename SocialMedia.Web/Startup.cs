@@ -50,7 +50,7 @@ namespace SocialMedia.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
 
-            //Injections layers
+            //Layer injections
             AddHelperDependencies.ConfigureServices(services);
             AddDataDependencies.ConfigureServices(services,Configuration);
             AddApplicationDependencies.ConfigureServices(services);
