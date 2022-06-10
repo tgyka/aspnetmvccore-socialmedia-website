@@ -12657,7 +12657,6 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.AspNetCore.App >= 2.1.1",
-      "Microsoft.EntityFrameworkCore >= 2.1.11",
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.1",
       "SocialMedia.Application >= 1.0.0",
@@ -12715,10 +12714,6 @@
             "target": "Package",
             "version": "[2.1.1, )",
             "autoReferenced": true
-          },
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[2.1.11, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",

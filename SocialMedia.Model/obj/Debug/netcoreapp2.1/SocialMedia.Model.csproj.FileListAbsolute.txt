@@ -7,3 +7,13 @@ C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debu
 C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.AssemblyInfo.cs
 C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.dll
 C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.pdb
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\bin\Debug\netcoreapp2.1\SocialMedia.Model.deps.json
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\bin\Debug\netcoreapp2.1\SocialMedia.Model.dll
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\bin\Debug\netcoreapp2.1\SocialMedia.Model.pdb
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.csproj.AssemblyReference.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.AssemblyInfoInputs.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.AssemblyInfo.cs
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.csproj.CoreCompileInputs.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.dll
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Model\obj\Debug\netcoreapp2.1\SocialMedia.Model.pdb

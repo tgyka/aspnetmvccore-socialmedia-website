@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialMedia.Data;
+using SocialMedia.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,12 +34,12 @@ namespace SocialMedia.Application.Post
                         c.User.ToFriends
                             .Where(k => 
                                 k.FromUserId == userId && 
-                                k.Status == Model.FriendStatus.Accepted)
+                                k.Status == FriendStatus.Accepted)
                             .Count() != 0 || 
                         c.User.FromFriends.
                             Where(k => 
                                 k.ToUserId == userId && 
-                                k.Status == Model.FriendStatus.Accepted)
+                                k.Status == FriendStatus.Accepted)
                             .Count() != 0 || 
                         c.User.Id == userId)
                     .OrderByDescending(c => c.Time)

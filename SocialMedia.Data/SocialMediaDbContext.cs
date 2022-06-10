@@ -10,13 +10,8 @@ namespace SocialMedia.Data
     public class SocialMediaDbContext : IdentityDbContext
 
     {
-        public SocialMediaDbContext()
-        {
-        }
-
         public SocialMediaDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         public DbSet<User> User { get; set; }
@@ -32,11 +27,6 @@ namespace SocialMedia.Data
 
         public DbSet<Post> Post { get; set; }
 
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=;Initial Catalog=;user id=;password=");
-        }
 
        
 
@@ -69,14 +59,14 @@ namespace SocialMedia.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Post>()
-           .HasOne(c => c.User)
-              .WithMany(m => m.Posts)
-          .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(c => c.User)
+                .WithMany(m => m.Posts)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Comment>()
                 .HasOne(s => s.User)
-              .WithMany(m => m.Comments)
-          .OnDelete(DeleteBehavior.Restrict);
+                .WithMany(m => m.Comments)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

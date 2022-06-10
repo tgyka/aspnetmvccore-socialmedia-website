@@ -6,6 +6,7 @@ using SocialMedia.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using SocialMedia.Model.Enums;
 
 namespace SocialMedia.Application.Friend
 {

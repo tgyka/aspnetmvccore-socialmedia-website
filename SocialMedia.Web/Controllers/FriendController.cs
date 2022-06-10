@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SocialMedia.Application.Friend;
 using SocialMedia.Data;
 using SocialMedia.Model;
+using SocialMedia.Model.Enums;
 using SocialMedia.Web.Models;
 
 namespace SocialMedia.Web.Controllers

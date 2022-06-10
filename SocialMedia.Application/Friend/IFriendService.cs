@@ -1,4 +1,5 @@
 ﻿using SocialMedia.Model;
+using SocialMedia.Model.Enums;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

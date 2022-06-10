@@ -1,0 +1,5 @@
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Application\obj\Debug\netcoreapp2.1\SocialMedia.Application.csproj.AssemblyReference.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Application\obj\Debug\netcoreapp2.1\SocialMedia.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Application\obj\Debug\netcoreapp2.1\SocialMedia.Application.AssemblyInfoInputs.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Application\obj\Debug\netcoreapp2.1\SocialMedia.Application.AssemblyInfo.cs
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Application\obj\Debug\netcoreapp2.1\SocialMedia.Application.csproj.CoreCompileInputs.cache

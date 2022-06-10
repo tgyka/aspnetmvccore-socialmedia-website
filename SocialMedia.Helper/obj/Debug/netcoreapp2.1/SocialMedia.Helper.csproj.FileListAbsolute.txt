@@ -1,0 +1,10 @@
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\bin\Debug\netcoreapp2.1\SocialMedia.Helper.deps.json
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\bin\Debug\netcoreapp2.1\SocialMedia.Helper.dll
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\bin\Debug\netcoreapp2.1\SocialMedia.Helper.pdb
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\obj\Debug\netcoreapp2.1\SocialMedia.Helper.csproj.AssemblyReference.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\obj\Debug\netcoreapp2.1\SocialMedia.Helper.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\obj\Debug\netcoreapp2.1\SocialMedia.Helper.AssemblyInfoInputs.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\obj\Debug\netcoreapp2.1\SocialMedia.Helper.AssemblyInfo.cs
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\obj\Debug\netcoreapp2.1\SocialMedia.Helper.csproj.CoreCompileInputs.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\obj\Debug\netcoreapp2.1\SocialMedia.Helper.dll
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Helper\obj\Debug\netcoreapp2.1\SocialMedia.Helper.pdb

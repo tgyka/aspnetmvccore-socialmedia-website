@@ -11,7 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SocialMedia.Application.DependencyInjection;
 using SocialMedia.Data;
+using SocialMedia.Data.DependencyInjection;
+using SocialMedia.Helper.DependencyInjection;
 
 namespace SocialMedia.Web
 {
@@ -45,6 +48,13 @@ namespace SocialMedia.Web
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+
+            //Injections layers
+            AddHelperDependencies.ConfigureServices(services);
+            AddDataDependencies.ConfigureServices(services,Configuration);
+            AddApplicationDependencies.ConfigureServices(services);
+
 
         }
 

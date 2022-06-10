@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialMedia.Model.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -17,13 +18,5 @@ namespace SocialMedia.Model
         public virtual User ToUser { get; set; }
 
         public virtual User FromUser { get; set; }
-    }
-
-    public enum FriendStatus 
-    {
-        Declined,
-        Accepted,
-        Pending,
-        Removed
     }
 }

@@ -37,3 +37,10 @@ C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Web\obj\Debug\
 C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Web\obj\Debug\netcoreapp2.1\Razor\Views\Settings\Index.g.cshtml.cs
 C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Web\obj\Debug\netcoreapp2.1\Razor\Views\Friends\Index.g.cshtml.cs
 C:\Users\Tgyka\Desktop\socialmediawebsite\SocialMedia\SocialMedia.Web\obj\Debug\netcoreapp2.1\Razor\Views\Search\Index.g.cshtml.cs
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Web\obj\Debug\netcoreapp2.1\SocialMedia.Web.csproj.AssemblyReference.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Web\obj\Debug\netcoreapp2.1\SocialMedia.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Web\obj\Debug\netcoreapp2.1\SocialMedia.Web.AssemblyInfoInputs.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Web\obj\Debug\netcoreapp2.1\SocialMedia.Web.AssemblyInfo.cs
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Web\obj\Debug\netcoreapp2.1\SocialMedia.Web.csproj.CoreCompileInputs.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Web\obj\Debug\netcoreapp2.1\SocialMedia.Web.RazorAssemblyInfo.cache
+C:\Users\Tugay\Desktop\social-media-github\aspnetmvccore-socialmedia-website\SocialMedia.Web\obj\Debug\netcoreapp2.1\SocialMedia.Web.RazorAssemblyInfo.cs
