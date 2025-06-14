@@ -50,7 +50,7 @@ namespace SocialMedia.Model
             {
                 return time.Days + " days";
             }
-            else if(new TimeSpan(365,0,0) < time )
+            else if(TimeSpan.FromDays(365) <= time )
             {
                 return (time.Days / 365) + " years";
             }
