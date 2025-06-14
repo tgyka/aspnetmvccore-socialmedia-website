@@ -9,20 +9,27 @@
             display: grid;
             grid-template-columns: 1fr 3fr;
             grid-gap: 20px;
+            background: #f5f6fa;
+            padding: 10px;
         }
 
             .messages .messages-left {
                 width: 100%;
                 height: 85vh;
+                background: #ffffff;
+                border: 1px solid #e5e5e5;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             }
 
-                .messages .messages-left .messages-left-header {
-                    width: 100%;
-                    display: flex;
-                    padding: 3% 3% 3% 3%;
-                    justify-content: flex-start;
-                    align-items: center;
-                }
+                    .messages .messages-left .messages-left-header {
+                        width: 100%;
+                        display: flex;
+                        padding: 3% 3% 3% 3%;
+                        justify-content: flex-start;
+                        align-items: center;
+                        border-bottom: 1px solid #e5e5e5;
+                    }
 
                     .messages .messages-left .messages-left-header img {
                         border-radius: 50%;
@@ -45,6 +52,7 @@
                             padding: 7%;
                             text-align: center;
                             border-radius: 50%;
+                            background: #f0f0f0;
                         }
 
                 .messages .messages-left .messages-left-search {
@@ -53,7 +61,7 @@
 
                     .messages .messages-left .messages-left-search input {
                         width: 100%;
-                        background: #e6e6e6;
+                        background: #f0f0f0;
                         padding: 3% 5%;
                         border: none;
                         border-radius: 15px;
@@ -73,7 +81,7 @@
                     }
 
                         .messages .messages-left .messages-left-messagelist .messages-left-listitem:hover {
-                            background: #fff;
+                            background: #f7f7f7;
                             border-radius: 5px;
                             cursor: pointer;
                         }
@@ -96,17 +104,21 @@
             .messages .messages-right {
                 width: 100%;
                 height: 85vh;
-                border-left: 1px solid rgba(0,0,0,0.2);
+                border-left: 1px solid rgba(0,0,0,0.1);
+                background: #ffffff;
+                border: 1px solid #e5e5e5;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             }
 
-                .messages .messages-right .messages-right-header {
-                    width: 100%;
-                    padding: 1% 1% 1% 1%;
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    border-bottom: 1px solid rgba(0,0,0,0.2);
-                }
+                    .messages .messages-right .messages-right-header {
+                        width: 100%;
+                        padding: 1% 1% 1% 1%;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        border-bottom: 1px solid #e5e5e5;
+                    }
 
                     .messages .messages-right .messages-right-header img {
                         border-radius: 50%;
@@ -130,8 +142,8 @@
                         .messages .messages-right .messages-right-messages .messages-right-messages-left span {
                             min-width: 30%;
                             max-width: 60%;
-                            background: #e4e4e4;
-                            border-radius: 5px;
+                            background: #f0f0f0;
+                            border-radius: 15px;
                             padding: 1%;
                             margin: 0.5% 0;
                         }
@@ -145,8 +157,9 @@
                         .messages .messages-right .messages-right-messages .messages-right-messages-right span {
                             min-width: 30%;
                             max-width: 60%;
-                            background: #e4e4e4;
-                            border-radius: 5px;
+                            background: #007bff;
+                            color: #fff;
+                            border-radius: 15px;
                             padding: 1%;
                             margin: 0.5% 0;
                         }
@@ -158,11 +171,11 @@
 
                     .messages .messages-right .messages-right-sendmessage textarea {
                         width: 100%;
-                        height: 35px;
-                        border: none;
+                        height: 45px;
+                        border: 1px solid #ccc;
                         border-radius: 10px;
                         padding: 0.5% 1%;
-                        background: #e4e4e4;
+                        background: #fafafa;
                     }
     </style>
 
