@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialMedia.Application", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia.Helper", "SocialMedia.Helper\SocialMedia.Helper.csproj", "{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia.Tests", "SocialMedia.Tests\SocialMedia.Tests.csproj", "{6AFDA9D2-8290-402C-ABF8-C98B9E1AA849}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,11 +46,15 @@ Global
 		{AF96AD3C-03B5-4476-9220-5067B0B42358}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF96AD3C-03B5-4476-9220-5067B0B42358}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF96AD3C-03B5-4476-9220-5067B0B42358}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
+                {8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {8171145D-0F57-4F84-9E53-C8BBB7D5ACE6}.Release|Any CPU.Build.0 = Release|Any CPU
+                {6AFDA9D2-8290-402C-ABF8-C98B9E1AA849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {6AFDA9D2-8290-402C-ABF8-C98B9E1AA849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {6AFDA9D2-8290-402C-ABF8-C98B9E1AA849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {6AFDA9D2-8290-402C-ABF8-C98B9E1AA849}.Release|Any CPU.Build.0 = Release|Any CPU
+        EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
