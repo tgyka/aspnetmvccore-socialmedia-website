@@ -118,13 +118,11 @@ namespace SocialMedia.Application.Friend
             try
             {
                 var friendModel = await _dbContext.Friend
-                    .SingleAsync(c => c.ToUserId == friend.ToUserId && c.FromUserId == friend.FromUserId && c.Status == friend.Status);
+                    .SingleOrDefaultAsync(c => c.ToUserId == friend.ToUserId && c.FromUserId == friend.FromUserId);
 
                 if (friendModel != null)
                 {
                     friendModel.Status = friend.Status;
-                    friendModel.ToUserId = friend.ToUserId;
-                    friendModel.FromUserId = friend.FromUserId;
                 }
                 else
                 {
