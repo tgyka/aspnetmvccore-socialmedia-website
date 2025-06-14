@@ -61,7 +61,7 @@ namespace SocialMedia.Web.Controllers
             }
             else
             {
-                throw new Exception("User has exist");
+                throw new Exception("User already exists.");
             }
 
             return RedirectToAction("Login", "Account");

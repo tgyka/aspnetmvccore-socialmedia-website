@@ -66,7 +66,7 @@ namespace SocialMedia.Web.Controllers
 
             if(userHasExist)
             {
-                throw new Exception("Username has exist");
+                throw new Exception("User already exists.");
             }
 
             var userModel = new User();
