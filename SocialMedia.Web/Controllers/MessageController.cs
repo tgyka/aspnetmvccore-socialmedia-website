@@ -111,7 +111,7 @@ namespace SocialMedia.Web.Controllers
 
             await _messageService.AddMessage(message);
 
-            return RedirectToAction("Index", "Messages");
+            return RedirectToAction("Index", "Message");
 
         }
     }
